@@ -7,6 +7,21 @@ CMyMatrix::CMyMatrix(int dimx, int dimy) {
 		this->components.push_back(CMyVektor(dimension_y));
 }
 
+CMyVektor CMyMatrix::operator *(CMyVektor b) {
+	
+	CMyVektor tmp = CMyVektor(this->getDimensionY());
+	int c = 0;
+	double result = 0;
+	for (int y = 0; y < this->dimension_y; y++) {
+		result = 0;
+		for (int x = 0; x < this->dimension_x; x++) {
+			 result += this->getComponent(y,x) * b(x);
+		}
+		tmp[c++] = result;
+	}
+	return tmp;
+}
+
 CMyMatrix CMyMatrix::invers() {
 	int x = this->dimension_x;
 	int y = this->dimension_y;
