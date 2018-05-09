@@ -88,4 +88,14 @@ CMyVektor CMyVektor::operator *(double lambda) {
 
 	return *this;
 }
+/*
+double CMyVektor::operator *(CMyVektor b) {
 
+	double result = 0.0;
+	for (int i = 0; i < this->getDimension(); i++)
+		
+
+
+	return result;
+}
+*/

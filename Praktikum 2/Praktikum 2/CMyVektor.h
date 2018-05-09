@@ -22,6 +22,7 @@ public:
 	double length();
 	CMyVektor operator+(CMyVektor b);
 	CMyVektor operator*(double lambda);
+	//CMyVektor operator*(CMyVektor b);
 	double& operator[](int i);
 	double operator()(int i);
 };
