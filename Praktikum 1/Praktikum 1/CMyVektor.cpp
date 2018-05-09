@@ -20,17 +20,29 @@ CMyVektor::CMyVektor(const CMyVektor &a) {
 }
 */
 
-CMyVektor CMyVektor::gradient(CMyVektor x, double(*funktion)(CMyVektor x)) {
+double CMyVektor::length() {
+	double l = 0.0;
+	double result = 0.0;
+	for (int i = 0; i < dimension; i++) {
+		double powed = pow(this->getComponent(i), 2);
+		result += powed;
+	}
+	return sqrt(result);
+
+}
+
+CMyVektor CMyVektor::gradient(double(*funktion)(CMyVektor x)) {
 
 	double h = pow(10, -8);
 	double r = 0.0;
-	CMyVektor gradient = CMyVektor(x.getDimension());
-	for (int i = 0; i < x.getDimension();  i++) {
-		double temp = x.getComponent(i);
-		x.setComponent(i,temp + h) ;
-
-		gradient.setComponent(i, ((funktion(x) + h) - funktion(x)) / h);
-		x.setComponent(i, temp );
+	CMyVektor gradient = CMyVektor(this->getDimension());
+	for (int i = 0; i < this->getDimension();  i++) {
+		double temp = this->getComponent(i);
+		double preset = (funktion(*this));
+		this->setComponent(i,temp + h) ;
+		
+		gradient.setComponent(i, ((funktion(*this) ) - preset) / h);
+		this->setComponent(i, temp );
 	}
 
 	return gradient;
@@ -44,9 +56,9 @@ void CMyVektor::print() {
 	std::cout << ")" << std::endl;
 }
 
-CMyVektor operator +(CMyVektor a, CMyVektor b) {
+CMyVektor CMyVektor::operator +( CMyVektor b) {
 
-	int dimension_a = a.getDimension();
+	int dimension_a = this->getDimension();
 	std::vector<double> resultVektor;
 	for (int i = 0; i < dimension_a; i++)
 		resultVektor.push_back(0);
@@ -55,16 +67,25 @@ CMyVektor operator +(CMyVektor a, CMyVektor b) {
 		return b;
 
 	for (int i = 0; i < dimension_a; i++) 
-		resultVektor[i] = a.getComponent(i) + b.getComponent(i);	
+		resultVektor[i] = this->getComponent(i) + b.getComponent(i);	
 
 	return CMyVektor(dimension_a, resultVektor);
 }
 
-CMyVektor operator *(double lambda, CMyVektor a) {
 
-	for (int i = 0; i < a.getDimension(); i++)
-		a.setComponent(i, a.getComponent(i) * lambda);
+double& CMyVektor::operator [](int i) {
+	return this->components[i];
+}
 
-		return a;
+double CMyVektor::operator ()(int i) {
+	return this->getComponent(i);
+}
+
+CMyVektor CMyVektor::operator *(double lambda) {
+
+	for (int i = 0; i < this->getDimension(); i++)
+		this->setComponent(i, this->getComponent(i) * lambda);
+
+		return *this;
 }
 

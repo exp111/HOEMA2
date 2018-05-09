@@ -13,17 +13,16 @@ public:
 		for (int i = 0; i < newDimension; i++)
 			this->components.push_back(0);
 	}
-	//CMyVektor(const CMyVektor &a);
 	int getDimension()  { return this->dimension; }
 	void setDimension(int newDimension) { this->dimension = newDimension; }
 	double getComponent(int n) ;
 	void setComponent(int n, double newComponent);
-	// get length components quadrieren und wurzeln
-	CMyVektor gradient(CMyVektor x, double (*funktion )(CMyVektor x));
+	CMyVektor gradient( double (*funktion )(CMyVektor x));
 	void print();
-	
-	
+	double length();
+	CMyVektor operator+( CMyVektor b);
+	CMyVektor operator*(double lambda);
+	double& operator[](int i);
+	double operator()(int i);
 };
 
-CMyVektor operator+(CMyVektor a, CMyVektor b);
-CMyVektor operator*(double lambda, CMyVektor a);

@@ -2,91 +2,98 @@
 #include "CMyVektor.h"
 
 double f(CMyVektor x){
-	return (sin(x.getComponent(0) + pow(x.getComponent(1), 2)) + pow(x.getComponent(1), 3) - 6 * pow(x.getComponent(1), 2) + 9 * x.getComponent(1));
+	return (sin(x(0) + pow(x(1), 2)) + pow(x(1), 3) - 6 * pow(x(1), 2) + 9 * x(1));
 }
 
 double g(CMyVektor x) {
-	return -(2*pow(x.getComponent(0),2) - 2*(x.getComponent(0) * x.getComponent(1))+ pow(x.getComponent(2),2) + pow(x.getComponent(2), 2) - 2*x.getComponent(0) - 4*x.getComponent(2));
+	return -(2*pow(x(0),2) - 2*(x(0) * x(1))+ pow(x(1),2) + pow(x(2), 2) - 2*x(0) - 4*x(2));
 }
 
 double test(CMyVektor x) {
-	return pow(x.getComponent(0), 2);
+	return pow(x(0), 2);
 }
 
 
 CMyVektor setComponents(CMyVektor a, std::vector<double> b) {
 
 	for (int i = 0; i <= a.getDimension(); i++) {
-		a.setComponent(i, b[i]);
+		a[i] = b[i];
 	}
 	return a;
 }
 
-
 void gradientenverfahren(CMyVektor x, double(*f)(CMyVektor x), double lambda = 1.0) {
 
-	CMyVektor xNeu  =	x + lambda * x.gradient(x, f);
-	int c = 0;
-	double check = f(xNeu);
-	if (check < 0)
-		check = check * (-1);
-	double q = pow(10, -5);
+	CMyVektor xNeu = CMyVektor(x.getDimension());
+	double c = pow(10, -5);
 
-	while(c < 50 || check < q){
-		std::cout << "Schritt " << c << std::endl;
+	for (int i = 0; i <= 49; i++) {
+		xNeu = x +  x.gradient(f) * lambda;
+
+		std::cout << "Schritt " << i << std::endl;
 		std::cout << "x =";
 		x.print();
 		std::cout << "lambda " << lambda << std::endl;
 		std::cout << " f(x) = " << f(x) << std::endl;
 		std::cout << " grad f(x) = ";
-		x.gradient(x, f).print();
-		std::cout << std::endl;
+		x.gradient( f).print();
+		std::cout << " ||grad f(x)|| = " << x.gradient( f).length() << std::endl;
 
 		std::cout << "xNeu =";
 		xNeu.print();
 		std::cout << " f(x_neu) = " << f(xNeu) << std::endl;
 
-
+		if (x.gradient( f).length() < c) {
+			std::cout << "Abgebrochen aufgrund der Laenge" << std::endl;
+			return;
+		}
 
 		if (f(xNeu) > f(x)) {
-			CMyVektor xTest = x + (2 * lambda *  x.gradient(x, f));
-			std::cout << "Test mit doppelter Schrittweite "<< lambda << std::endl;
-			std::cout << "xTest =";
-			xTest.print();			
-			std::cout << " f(x_Test) = " << f(xTest) << std::endl;
-
-			if (f(xTest) > f(xNeu)) {
+			CMyVektor xTest = x + (x.gradient( f) * lambda * 2);
+			if (f(xTest)> f(xNeu)) {
+				lambda *= 2;
 				x = xTest;
-				lambda = lambda * 2;
-				std::cout << "Verdoppeln!" << std::endl;
 			}
-			else
+			else {
 				x = xNeu;
-		}
-		else if (f(xNeu) <= f(x)) {
-
-			while (f(xNeu) <= f(x)) {
-				lambda = lambda / 2;
-				xNeu = xNeu +  lambda *  xNeu.gradient(xNeu, f);
+				continue;
 			}
-			std::cout << "Halbieren! lambda : " << lambda << std::endl;
-			x = xNeu;
+		} 
+		else if (f(xNeu) <= f(x)) {
+			CMyVektor xTest = xNeu;
+			while (f(x) > f(xTest)) {
+				lambda /= 2;
+				xTest = x +  x.gradient( f) * lambda;
+			}
+			x = xTest;
 		}
-		c++;
 		std::cout << std::endl;
 	}
-
-	
 }
 
 
-
 int main() {
-
-	std::vector<double> t = {3,2};
-	CMyVektor m =  CMyVektor(2, t);
-	gradientenverfahren(m, &f);
 	
-	system("Pause");
+	int selection = 0;
+	std::vector<double> a = { 3,2 };
+	CMyVektor vA =  CMyVektor(2, a);
+	a = { 0,0,0 };
+	CMyVektor vB = CMyVektor(3, a);
+
+	while (selection != 3) {
+		
+		std::cout << "1 fuer f, 2 fuer g" << std::endl;
+		std::cin >> selection;
+		switch (selection) {
+		case 1:
+			gradientenverfahren(vA, &f);
+			break;
+		case 2:
+			gradientenverfahren(vB, &g, 0.1);
+			break;
+		}	
+	
+	}
+	
 	return 0;
 }
