@@ -33,64 +33,9 @@ CMyVektor fZusatz(CMyVektor x) {
 }
 
 
-CMyMatrix jacobi(CMyVektor x, CMyVektor(*f)(CMyVektor x)) {
-
-	int x_len = x.getDimension();
-	int y_len = f(x).getDimension();
-
-	CMyMatrix jacobiMatrix(x_len,y_len);
-	const double h = 1e-4;
-	double r = 0.0;
-	CMyVektor gradient = CMyVektor(x_len);
-
-	for (int yA = 0; yA < y_len; yA++) {
-		for (int xA = 0; xA < x_len; xA++) {
-			double temp = x(xA);
-			double preset = f(x)(yA);
-			x[xA] = temp + h;
-
-			gradient[xA] =  (f(x)(yA) - preset) / h;
-			x[xA] = temp;
-		}
-		jacobiMatrix[yA] = gradient;
-	}
-	return jacobiMatrix;
-}
-
-void newtonVerfahren(CMyVektor x, CMyVektor(*f)(CMyVektor x)) {
 
 
-	for (int i = 0; i < 50; i++) {
-		std::cout << "Schritt " << i << std::endl;
-		if (f(x).length() < 1e-5){
-			std::cout << "Abgebrochen aufgrund der laenge" << std::endl;
-			return;
-		}
-		std::cout << "x = ";
-		x.print();
-		std::cout << "f(x) = ";
-		f(x).print();
 
-		CMyMatrix deriv = jacobi(x, f);
-		CMyMatrix inverse  = deriv.invers();
-
-		std::cout << "f'(x) = ";
-		deriv[0].print();
-		deriv[1].print();
-
-		std::cout << "f'(x)^(-1) = ";
-		inverse[0].print();
-		inverse[1].print();
-
-		CMyVektor val = inverse * f(x) * (-1);		
-
-		std::cout << "dx = ";
-		val.print();
-		std::cout << "||f(x)|| = " << f(x).length() << std::endl;
-		x = val + x;
-	}
-
-}
 
 
 
@@ -150,8 +95,7 @@ int main() {
 			 t = jacobi(jacob, &f);
 			 t[0].print();
 			 t[1].print();
-			 t[2].print();
-			
+			 t[2].print();			
 			break;
 		case 1:			
 			newtonVerfahren(newton, &g);

@@ -22,3 +22,6 @@ public:
 	CMyVektor operator *(CMyVektor b);
 	
 };
+
+void newtonVerfahren(CMyVektor x, CMyVektor(*f)(CMyVektor x));
+CMyMatrix jacobi(CMyVektor x, CMyVektor(*f)(CMyVektor x));
