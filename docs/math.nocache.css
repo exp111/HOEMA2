@@ -15,6 +15,7 @@
     -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
     grid-area: a;
     align-self: center;
+	    margin-bottom: 0.3em;
 }
 
 .dot {
@@ -59,8 +60,21 @@ body {
   z-index: 501;
 }
 
+.lines {
+    transform: rotateX(74deg);
+    background-size: 40px 40px;
+       background-image: repeating-linear-gradient(0deg, #FF0FF8, #FF0FF8 2px, transparent 1px, transparent 40px),repeating-linear-gradient(-90deg, #FF0FF8, #FF0FF8 2px, transparent 2px, transparent 40px);
+    height: 500px;
+    width: 200em;
+    position: absolute;
+    bottom: 0;
+    left: -400px;
+    z-index: 50;
+}
+
 
 .retro {
+  perspective: 600px;
   width: 100%;
   height: 100vh;
   min-height: 400px;
@@ -79,6 +93,20 @@ body {
   background-size: 3px 5px;
   z-index: 601;
   pointer-events: none;
+}
+
+.m-grid {
+  position: absolute;
+  top: 50%;
+  margin-top: -75vh;
+  left: 50%;
+  margin-left: -100vw;
+  width: 200vw;
+  height: 150vh;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  background-image: linear-gradient(0deg, transparent 24%, rgba(236, 0, 140, 0.5) 25%, rgba(236, 0, 140, 0.9) 26%, transparent 27%, transparent 74%, rgba(236, 0, 140, 0.5) 75%, rgba(236, 0, 140, 0.9) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(236, 0, 140, 0.75) 25%, rgba(236, 0, 140, 0.25) 26%, transparent 27%, transparent 74%, rgba(236, 0, 140, 0.75) 75%, rgba(236, 0, 140, 0.25) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
 }
 
 
