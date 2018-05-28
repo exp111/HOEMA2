@@ -1,18 +1,78 @@
 
 @import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
 
-body{
-	background-color:black;
-}
+
 
 .math{
 	font-family: 'Permanent Marker', cursive;
-	  font-variant:small-caps;
-  font-size: 90px;
-  -webkit-transform: skew(-15deg,-15deg);
-  background-image: -webkit-linear-gradient(#FF0FF8 0%,  #F9F9F7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-  -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
+    font-variant: small-caps;
+    font-size: 10rem;
+    -webkit-transform: skew(-15deg,-15deg);
+    background-image: -webkit-linear-gradient(#FF0FF8 0%, #F9F9F7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* margin: 0; */
+    -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
+    grid-area: a;
+    align-self: center;
 }
+
+
+.triangle{
+	stroke: #fd55f8;
+}
+
+
+.svgShit{
+	    position: absolute;
+    bottom: 31%;
+}
+
+
+
+
+body {
+  background: #000;
+  background-image: linear-gradient(to bottom, #6A0275 10%, #040C4A 60%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.m-logo {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 501;
+}
+
+
+.retro {
+  width: 100%;
+  height: 100vh;
+  min-height: 400px;
+  overflow: hidden;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.retro::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(transparent 70%, rgba(0, 0, 0, 0.5) 30%);
+  background-size: 3px 3px;
+  z-index: 601;
+  pointer-events: none;
+}
+
+
+
+
+
+
