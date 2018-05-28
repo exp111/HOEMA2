@@ -7,4 +7,12 @@ body{
 
 .math{
 	font-family: 'Permanent Marker', cursive;
+	  font-variant:small-caps;
+  font-size: 90px;
+  -webkit-transform: skew(-15deg,-15deg);
+  background-image: -webkit-linear-gradient(#FF0FF8 0%,  #F9F9F7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
 }
