@@ -8,11 +8,13 @@
     font-variant: small-caps;
     font-size: 10rem;
     -webkit-transform: skew(-15deg,-15deg);
+	-moz-transform: skew(-15deg,-15deg);
     background-image: -webkit-linear-gradient(#FF0FF8 0%, #F9F9F7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    /* margin: 0; */
+	-moz-text-fill-color: transparent;
     -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
+	-moz-filter: drop-shadow(2px 2px 20px #f008b7);
     grid-area: a;
     align-self: center;
 	    margin-bottom: 0.3em;
@@ -20,6 +22,7 @@
 
 .dot {
 	-webkit-box-reflect: below 0px linear-gradient(transparent, rgba(250, 250, 250, 0.3));
+	-moz-box-reflect: below 0px linear-gradient(transparent, rgba(250, 250, 250, 0.3));
     height: 420px;
     width: 420px;
   background-color: #bbb;
@@ -53,7 +56,7 @@ body {
 
 .blackBack{
 	width: 100vw;
-    height: 39%;
+    height: 23em;
     position: absolute;
     bottom: 0;
     background-color: black;
@@ -93,6 +96,7 @@ body {
   min-height: 400px;
   overflow: hidden;
   -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
           filter: blur(1px);
 }
 .retro::after {
@@ -117,6 +121,7 @@ body {
   width: 200vw;
   height: 150vh;
   -webkit-transform: scaleY(0);
+  -moz-transform: scaleY(0);
           transform: scaleY(0);
   background-image: linear-gradient(0deg, transparent 24%, rgba(236, 0, 140, 0.5) 25%, rgba(236, 0, 140, 0.9) 26%, transparent 27%, transparent 74%, rgba(236, 0, 140, 0.5) 75%, rgba(236, 0, 140, 0.9) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(236, 0, 140, 0.75) 25%, rgba(236, 0, 140, 0.25) 26%, transparent 27%, transparent 74%, rgba(236, 0, 140, 0.75) 75%, rgba(236, 0, 140, 0.25) 76%, transparent 77%, transparent);
   background-size: 50px 50px;
