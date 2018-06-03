@@ -17,7 +17,14 @@ CMyVektor C_DGLSolver::ableitungen(CMyVektor y, double x) {
 		return this->fDGLSystem(y, x);
 	}
 	else {
+		CMyVektor dgl(y.getDimension());
+		int lastEntry = y.getDimension() - 1;
+		dgl[lastEntry] = this->fDGLNthOrder(y, x);
 		
+		for (int i = 0; i < lastEntry; i++) {
+			dgl[i] = y(i + 1);
+		}
+		return dgl;
 	}
 }
 
