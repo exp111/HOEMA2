@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="CMyVektor.cpp" />
     <ClCompile Include="C_DGLSolver.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMyVektor.h" />

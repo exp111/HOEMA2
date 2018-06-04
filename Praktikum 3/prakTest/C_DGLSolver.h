@@ -17,6 +17,6 @@ public:
 	C_DGLSolver(CMyVektor(*f)(CMyVektor y, double x));
 	C_DGLSolver(double(*f)(CMyVektor y, double x));
 
-	void eulerVerfahren(int xStart, int xEnd, int schritte, CMyVektor yStart);
-	void heunVerfahren(int xStart, int xEnd, int schritte, CMyVektor yStart);
+	void eulerVerfahren(double xStart, double xEnd, double schritte, CMyVektor yStart);
+	void heunVerfahren(double xStart, double xEnd, double schritte, CMyVektor yStart);
 };

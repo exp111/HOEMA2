@@ -28,5 +28,5 @@ CMyVektor C_DGLSolver::ableitungen(CMyVektor y, double x) {
 	}
 }
 
-void C_DGLSolver::eulerVerfahren(int xStart, int xEnd, int schritte, CMyVektor yStart) {}
-void C_DGLSolver::heunVerfahren(int xStart, int xEnd, int schritte, CMyVektor yStart) {}
+void C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double schritte, CMyVektor yStart) {}
+void C_DGLSolver::heunVerfahren(double xStart, double xEnd, double schritte, CMyVektor yStart) {}
