@@ -33,7 +33,7 @@ CMyVektor C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, 
 	double x = xStart;
 	CMyVektor y = yStart;
 
-	for (double i = 0; x < xEnd; i++,x += h) {
+	for (double i = 0; x <= xEnd; i++,x += h) {
 
 		CMyVektor yDeriv = ableitungen(y, x);
 
@@ -61,7 +61,7 @@ CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, C
 	int i = 0;
 
 	
-		while(x < xEnd){
+	for (double i = 0; x <= xEnd; i++, x += h) {
 			
 		CMyVektor yDeriv = ableitungen(y, x);
 		CMyVektor yOrigDeriv = yDeriv;
@@ -88,8 +88,7 @@ CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, C
 			std::cout << std::endl;
 		}
 		y = y + yMiddle * h ;
-		x += h;
-		i++;
+
 	}
 	return y;
 }
