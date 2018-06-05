@@ -20,7 +20,7 @@ void userInput(int &selection){
 	std::cout << "2. erster Ordnung Heun" << std::endl;
 	std::cout << "3. Hoeherer Ordnung Euler" << std::endl;
 	std::cout << "4. Hoeherer Ordnung Heun" << std::endl;
-	std::cout << "0. Beenden" << std::endl;
+	std::cout << "5. Beenden" << std::endl;
 	std::cin >> selection;
 }
 
@@ -41,7 +41,7 @@ int main() {
 	CMyVektor startHigher(3);
 	startHigher[0] = 1; startHigher[1] = -1; startHigher[2] = 2;
 
-	while(selection != 0){
+	while(selection != 5){
 	
 		 userInput(selection);
 		
