@@ -28,7 +28,7 @@ CMyVektor C_DGLSolver::ableitungen(CMyVektor y, double x) {
 	}
 }
 
-void C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, CMyVektor yStart) {
+CMyVektor C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, CMyVektor yStart) {
 
 	double h = (xEnd - xStart) / steps;
 	double x = xStart;
@@ -47,9 +47,9 @@ void C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, CMyVe
 		std::cout << std::endl;
 		y = y + yStrich * h;
 	}
-
+	return y;
 }
-void C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, CMyVektor yStart) {
+CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, CMyVektor yStart) {
 		
 	double h = (xEnd - xStart) / steps;
 	double x = xStart;
@@ -86,6 +86,6 @@ void C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, CMyVek
 		std::cout << std::endl;
 
 	}
-
+	return y;
 }
 
