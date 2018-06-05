@@ -1,5 +1,5 @@
 #include "C_DGLSolver.h"
-
+#include "iomanip"
 
 
 CMyVektor yFirstOrder(CMyVektor y, double x) {
@@ -38,7 +38,7 @@ int main() {
 	C_DGLSolver DGLHigher(yThirdOrder);
 	CMyVektor startFirst(2);
 	startFirst[0] = 0; startFirst[1] = 1;
-	CMyVektor startHigher(3), t(3);
+	CMyVektor startHigher(3), res(3);
 	startHigher[0] = 1; startHigher[1] = -1; startHigher[2] = 2;
 
 	while(selection != 5){
@@ -54,12 +54,15 @@ int main() {
 			break;
 		case 3:
 			inputSteps(steps);
-			t = DGLHigher.eulerVerfahren(0, 2, steps, startHigher);
-			std::cout << t[0] - 0.5;
+			res = DGLHigher.eulerVerfahren(1, 2, steps, startHigher);
+			std::cout << "Abweichung bei Euler bei " << steps
+				<< " Schritten: " << res[0] - 5e-1 << std::endl;
 			break;
 		case 4:
 			inputSteps(steps);
-			DGLHigher.heunVerfahren(0, 2, steps, startHigher);
+			res = DGLHigher.heunVerfahren(1, 2, steps, startHigher);
+			std::cout <<"Abweichung bei Heun bei " << steps 
+				<<" Schritten: " << res[0] - 5e-1 << std::endl;
 			break;
 		default:
 			break;

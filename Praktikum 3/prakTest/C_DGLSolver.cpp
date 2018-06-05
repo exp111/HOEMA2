@@ -3,7 +3,6 @@
 C_DGLSolver::C_DGLSolver(CMyVektor(*f)(CMyVektor y, double x)) {
 	this->fDGLSystem = f;
 	this->isDGLHigherOrder = false;
-
 }
 
 C_DGLSolver::C_DGLSolver(double(*f)(CMyVektor y, double x)) {
@@ -35,57 +34,62 @@ CMyVektor C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, 
 	CMyVektor y = yStart;
 
 	for (double i = 0; x < xEnd; i++,x += h) {
-		std::cout << std::endl;
-		std::cout << "Schritt " << i << ":" << std::endl;
-		std::cout << "x = " << x << std::endl;
-		std::cout << "y = ";
-		y.print();
-		std::cout << std::endl;
+
 		CMyVektor yDeriv = ableitungen(y, x);
-		std::cout << "y' = ";
-		yDeriv.print();
-		std::cout << std::endl;
+
+		if (!this->isDGLHigherOrder) {
+			std::cout << std::endl;
+			std::cout << "Schritt " << i << ":" << std::endl;
+			std::cout << "x = " << x << std::endl;
+			std::cout << "y = ";
+			y.print();
+			std::cout << std::endl;
+			std::cout << "y' = ";
+			yDeriv.print();
+			std::cout << std::endl;
+		}
 		y = y + yDeriv * h;
 	}
 	return y;
 }
+
 CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, CMyVektor yStart) {
 		
 	double h = (xEnd - xStart) / steps;
 	double x = xStart;
 	CMyVektor y = yStart;
+	int i = 0;
 
-	std::cout << "h = " << h << std::endl;
-
-	for (int i = 0; x < xEnd; i++, x += h) {
-
-		std::cout << "Schritt " << i << ":" << std::endl;
-		std::cout << "x = " << x << std::endl;
+	
+		while(x < xEnd){
+			
 		CMyVektor yDeriv = ableitungen(y, x);
-		std::cout << "y = ";
-		y.print();
-		std::cout << "y'_orig = ";
-		yDeriv.print();
-		/////////////////////////////////
 		CMyVektor yOrigDeriv = yDeriv;
 		CMyVektor yTest = y + yDeriv * h;
-		std::cout << "y_Test = ";
-		yTest.print();
 		double xNext = x + h;
 		CMyVektor yTestDeriv = ableitungen(yTest, xNext);
+		CMyVektor yMiddle = (yOrigDeriv + yTestDeriv) * 5e-1;
 
-		std::cout << "y'_Test = ";
-		yTestDeriv.print();
-		//////////////////////////////////////////////////
-		CMyVektor yMiddle = (yOrigDeriv + yTestDeriv) * 0.5;
+		if (!this->isDGLHigherOrder) {
+			std::cout << "Schritt " << i << ":" << std::endl;
+			std::cout << "x = " << x << std::endl;
+			std::cout << "y = ";
+			y.print();
+			std::cout << "y'_orig = ";
+			yDeriv.print();
 
-		std::cout << "y'_Mittel = ";
-		yMiddle.print();
+			std::cout << "y_Test = ";
+			yTest.print();
+			std::cout << "y'_Test = ";
+			yTestDeriv.print();
 
+			std::cout << "y'_Mittel = ";
+			yMiddle.print();
+			std::cout << std::endl;
+		}
 		y = y + yMiddle * h ;
-		std::cout << std::endl;
-
+		x += h;
+		i++;
 	}
 	return y;
 }
-
