@@ -20,5 +20,5 @@ void werte_ausgeben(const char *dateiname, std::vector<CKomplex> werte, double e
 double xAt(int i, int n);
 fourier fourierTransForwards(std::vector<CKomplex> data);
 std::vector<CKomplex> fourierTransBackwards(fourier data, int n);
-std::vector<CKomplex> fourierComplex(std::vector<CKomplex> data);
+std::vector<CKomplex> fourierComplex(std::vector<CKomplex> data,bool direction);
 double difference(std::vector<CKomplex> in, std::vector<CKomplex> out);

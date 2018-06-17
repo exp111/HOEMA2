@@ -14,9 +14,11 @@ public:
 	double im() { return this->imagi; }
 	double abs();
 
-	CKomplex operator +(CKomplex* r);
-	CKomplex operator *(CKomplex* r);
+	CKomplex operator +(CKomplex r);
+	void operator +=(CKomplex r);
+	CKomplex operator *(CKomplex r);
 	CKomplex operator *(double r);
+	void operator *=(double r);
 	
 
 

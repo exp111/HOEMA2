@@ -46,9 +46,10 @@ void werte_ausgeben(const char *dateiname, std::vector<CKomplex> werte, double e
 	fp << N << std::endl;
 	// Eintraege in das File schreiben
 	fp.precision(10);
-	for (i = 0; i < N; i++)
+	for (i = 0; i < N; i++) 
 		if (werte[i].abs() > epsilon)
 			fp << i << "\t" << werte[i].re() << "\t" << werte[i].im() << std::endl;
+	
 	// File schliessen
 	fp.close();
 }
@@ -110,10 +111,39 @@ std::vector<CKomplex> fourierTransBackwards(fourier data, int n) {
 double difference(std::vector<CKomplex> in, std::vector<CKomplex> out) {
 
 	double diff = 0;
-	for (int i = 0; i < in.size(); i++) {
+	for (int i = 0; i < out.size(); i++) {
+
 		double curr = in[i].abs() - out[i].abs();
-		if (curr > diff)
+		if (curr > diff && out[i].abs() != 0)
 			diff = curr;
 	}
 	return diff;
+}
+
+std::vector<CKomplex> fourierComplex(std::vector<CKomplex> data,bool direction) {
+
+	int n = data.size();
+	std::vector<CKomplex> result;
+
+	if (direction) {
+		for (int h = 0; h < n; h++) {
+			result.push_back(CKomplex(0, 0));
+			for (int k = 0; k < n  ; k++) {
+				result[h] += data[k] * CKomplex((-2 * M_PI * k * h)/n);
+			}
+			result[h] *= 1 / sqrt(n);
+		}
+	}
+	else {
+		for (int h = 0; h < n; h++) {
+			result.push_back(CKomplex(0, 0));
+			for (int k = 0; k < n ; k++) {
+				result[h] += data[k] * CKomplex((2 * M_PI * k * h)/n);
+			}
+			result[h] *= 1 / sqrt(n);
+		}
+	
+	}
+
+	return result;
 }
