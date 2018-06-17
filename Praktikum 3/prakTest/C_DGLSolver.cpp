@@ -12,6 +12,7 @@ C_DGLSolver::C_DGLSolver(double(*f)(CMyVektor y, double x)) {
 
 CMyVektor C_DGLSolver::ableitungen(CMyVektor y, double x) {
 
+
 	if (!this->isDGLHigherOrder) {
 		return this->fDGLSystem(y, x);
 	}
@@ -32,7 +33,7 @@ CMyVektor C_DGLSolver::eulerVerfahren(double xStart, double xEnd, double steps, 
 	double h = (xEnd - xStart) / steps;
 	double x = xStart;
 	CMyVektor y = yStart;
-
+	
 	for (double i = 0; x <= xEnd; i++,x += h) {
 
 		CMyVektor yDeriv = ableitungen(y, x);
@@ -64,6 +65,7 @@ CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, C
 	for (double i = 0; x <= xEnd; i++, x += h) {
 			
 		CMyVektor yDeriv = ableitungen(y, x);
+		
 		CMyVektor yOrigDeriv = yDeriv;
 		CMyVektor yTest = y + yDeriv * h;
 		double xNext = x + h;
@@ -76,7 +78,7 @@ CMyVektor C_DGLSolver::heunVerfahren(double xStart, double xEnd, double steps, C
 			std::cout << "y = ";
 			y.print();
 			std::cout << "y'_orig = ";
-			yDeriv.print();
+			yOrigDeriv.print();
 
 			std::cout << "y_Test = ";
 			yTest.print();

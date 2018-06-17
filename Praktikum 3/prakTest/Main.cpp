@@ -13,6 +13,15 @@ double yThirdOrder(CMyVektor y, double x) {
 	return (2 * x * y[1] * y[2])+(2 * y[0] * y[0] * y[1]);
 }
 
+CMyVektor yTest(CMyVektor y, double x) {
+
+	CMyVektor first(2);
+	first[0] = x*y[0] -y[1];
+	first[1] = y[0] + y[1];
+	return first;
+
+}
+
 
 void userInput(int &selection){
 
@@ -40,6 +49,10 @@ int main() {
 	startFirst[0] = 0; startFirst[1] = 1;
 	CMyVektor startHigher(3), res(3);
 	startHigher[0] = 1; startHigher[1] = -1; startHigher[2] = 2;
+	C_DGLSolver DGLTest(yTest);
+	CMyVektor test(2);
+	test[0] = 1; test[1] = -1;
+	
 
 	while(selection != 5){
 	
@@ -63,6 +76,12 @@ int main() {
 			res = DGLHigher.heunVerfahren(1, 2, steps, startHigher);
 			std::cout <<"Abweichung bei Heun bei " << steps 
 				<<" Schritten: " << res[0] - 5e-1 << std::endl;
+			break;
+		case 6:
+			DGLTest.eulerVerfahren(0, 2, 100, test);
+			break;
+		case 7:
+			DGLTest.heunVerfahren(0, 2, 100, test);
 			break;
 		default:
 			break;
