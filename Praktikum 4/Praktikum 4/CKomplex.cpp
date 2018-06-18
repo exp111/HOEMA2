@@ -30,7 +30,7 @@ void CKomplex::operator +=(CKomplex r) {
 }
 
 CKomplex CKomplex::operator *(CKomplex r) {
-	double newReal = (this->re() * r.re()) + (this->im() * r.im());
+	double newReal = (this->re() * r.re()) - (this->im() * r.im());
 	double newImag = (this->re() * r.im()) + (this->im() * r.re());
 	return CKomplex(newReal, newImag);
 }
